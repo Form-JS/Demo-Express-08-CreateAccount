@@ -14,8 +14,8 @@ const memberModel = {
                 + ' VALUES (@email, @pwd)';
 
             const request = new mssql.PreparedStatement(db);
-            request.input('email', mssql.VarChar);
-            request.input('pwd', mssql.Char);
+            request.input('email', mssql.VarChar(250));
+            request.input('pwd', mssql.Char(60));
 
             await request.prepare(querySQL);
 
@@ -41,7 +41,7 @@ const memberModel = {
             const querySQL = "SELECT * FROM Member WHERE Email LIKE @email";
 
             const request = new mssql.PreparedStatement(db);
-            request.input('email', mssql.VarChar);
+            request.input('email', mssql.VarChar(250));
 
             await request.prepare(querySQL);
 
