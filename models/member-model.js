@@ -4,6 +4,8 @@ const { memberMapper } = require('./mappers/member-mapper');
 
 const memberModel = {
 
+    // TODO Add rest of CRUD Method
+
     insert: async ({ email, passwordHash }) => {
         let db;
         try {

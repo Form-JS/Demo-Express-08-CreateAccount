@@ -21,8 +21,9 @@ const memberController = {
                 console.log(`Account ${id} create !!!`);
                 res.redirect('/');
             });
-
     }
+
+    // TODO Add methode for "Login"
 };
 
 module.exports = memberController;

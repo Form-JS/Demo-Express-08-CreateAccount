@@ -18,6 +18,10 @@ app.set('views', process.cwd() + '/views');
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 
+
+// TODO Manage session in Express
+
+
 // Routing
 app.use(homeRouter);
 app.use(memberRouter);
