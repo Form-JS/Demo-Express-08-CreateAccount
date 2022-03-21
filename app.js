@@ -11,17 +11,21 @@ require('dotenv-flow').config();
 const app = express();
 
 // Variable de config
-const { PORT, NODE_ENV, SESSION_SECRET } = process.env;
+const { PORT, NODE_ENV, SESSION_SECRET, SESSION_STORE_SECRET } = process.env;
 
 // Storage session in file (exemple)
 const FileStore = require('session-file-store')(session);
+const fileStoreConfig = {};
 
 // Active session in Express
 app.use(session({
-    store: new FileStore({}),
+    store: new FileStore(fileStoreConfig),
     secret: SESSION_SECRET,
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 3600000
+    }
 }));
 
 // Configurgation

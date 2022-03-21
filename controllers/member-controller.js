@@ -9,7 +9,7 @@ const memberController = {
             return res.redirect('/');
         }
 
-        res.render('member/register');
+        res.renderWithData('member/register');
     },
 
     registerPOST: (req, res) => {
@@ -33,7 +33,7 @@ const memberController = {
             return res.redirect('/');
         }
 
-        res.render('member/login');
+        res.renderWithData('member/login');
     },
 
     loginPOST: (req, res) => {
@@ -67,7 +67,7 @@ const memberController = {
                 // Le login est invalide
                 else {
                     // TODO Ajouter l'email dans la page login renvoyer
-                    res.render('member/login');
+                    res.renderWithData('member/login');
                 }
             });
     },
