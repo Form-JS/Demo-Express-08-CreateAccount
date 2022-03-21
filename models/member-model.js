@@ -6,23 +6,25 @@ const memberModel = {
 
     // TODO Add rest of CRUD Method
 
-    insert: async ({ email, passwordHash }) => {
+    insert: async ({ email, pseudo, passwordHash }) => {
         let db;
         try {
             db = await createDbConnection();
 
-            const querySQL = 'INSERT INTO Member (Email, Password)'
+            const querySQL = 'INSERT INTO Member (Email, Pseudo, Password)'
                 + ' OUTPUT inserted.MemberId'
-                + ' VALUES (@email, @pwd)';
+                + ' VALUES (@email, @pseudo, @pwd)';
 
             const request = new mssql.PreparedStatement(db);
             request.input('email', mssql.VarChar(250));
+            request.input('pseudo', mssql.VarChar(50));
             request.input('pwd', mssql.Char(60));
 
             await request.prepare(querySQL);
 
             const result = await request.execute({
                 'email': email,
+                'pseudo': pseudo,
                 'pwd': passwordHash
             });
 

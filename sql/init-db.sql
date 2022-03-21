@@ -14,3 +14,8 @@ CREATE TABLE [Member] (
     CONSTRAINT PK_Member PRIMARY KEY ([MemberId]),
     CONSTRAINT UK_Member__Email UNIQUE ([Email])
 );
+GO
+
+ALTER TABLE Member
+ ADD Pseudo VARCHAR(50) NOT NULL
+	 CONSTRAINT UK_Member__Pseudo UNIQUE;

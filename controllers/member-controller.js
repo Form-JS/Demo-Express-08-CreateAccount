@@ -10,12 +10,13 @@ const memberController = {
     },
 
     registerPOST: (req, res) => {
-        const { email, pwd } = req.body;
+        // TODO Ajouter un schema de validation
+        const { email, pseudo, pwd } = req.body;
 
         const passwordHash = bcryt.hashSync(pwd, 10);
 
         memberModel.insert({
-            email, passwordHash
+            email, pseudo, passwordHash
         })
             .then((id) => {
                 console.log(`Account ${id} create !!!`);
