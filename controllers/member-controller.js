@@ -12,7 +12,7 @@ const memberController = {
         // TODO Ajouter un schema de validation
         const { email, pseudo, pwd } = req.body;
 
-        const passwordHash = bcryt.hashSync(pwd, 10);
+        const passwordHash = bcryt.hashSync(pwd + process.env.PWD_PEPPER, 10);
 
         memberModel.insert({
             email, pseudo, passwordHash
@@ -35,7 +35,7 @@ const memberController = {
             .then(member => {
                 // Si le member est valide
                 if (member !== null) {
-                    return bcryt.compare(pwd, member.passwordHash);
+                    return bcryt.compare(pwd + process.env.PWD_PEPPER, member.passwordHash);
                 }
 
                 return Promise.resolve(false);
