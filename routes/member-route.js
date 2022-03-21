@@ -9,4 +9,6 @@ memberRouter.post('/member/register', memberController.registerPOST);
 memberRouter.get('/member/login', memberController.loginGET);
 memberRouter.post('/member/login', memberController.loginPOST);
 
+memberRouter.get('/member/logout', memberController.logout);
+
 module.exports = memberRouter;

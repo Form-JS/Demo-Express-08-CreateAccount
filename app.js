@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const homeRouter = require('./routes/home-router');
 const memberRouter = require('./routes/member-route');
 
@@ -9,7 +10,18 @@ require('dotenv-flow').config();
 const app = express();
 
 // Variable de config
-const { PORT, NODE_ENV } = process.env;
+const { PORT, NODE_ENV, SESSION_SECRET } = process.env;
+
+// Storage session in file (exemple)
+const FileStore = require('session-file-store')(session);
+
+// Active session in Express
+app.use(session({
+    store: new FileStore({}),
+    secret: SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false
+}));
 
 // Configurgation
 app.set('view engine', 'ejs');
@@ -17,10 +29,6 @@ app.set('views', process.cwd() + '/views');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-
-
-// TODO Manage session in Express
-
 
 // Routing
 app.use(homeRouter);

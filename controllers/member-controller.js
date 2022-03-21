@@ -5,6 +5,11 @@ const memberModel = require('../models/member-model');
 const memberController = {
 
     registerGET: (req, res) => {
+        // Check si l'utilisateur est deja connecté
+        if (req.session.connected) {
+            return res.redirect('/');
+        }
+
         res.render('member/register');
     },
 
@@ -24,6 +29,11 @@ const memberController = {
     },
 
     loginGET: (req, res) => {
+        // Check si l'utilisateur est deja connecté
+        if (req.session.connected) {
+            return res.redirect('/');
+        }
+
         res.render('member/login');
     },
 
@@ -31,10 +41,12 @@ const memberController = {
         // TODO Ajouter un schema de validation
         const { email, pwd } = req.body;
 
+        let memberDB = null;
         memberModel.getByEmail(email)
             .then(member => {
                 // Si le member est valide
                 if (member !== null) {
+                    memberDB = member;
                     return bcryt.compare(pwd + process.env.PWD_PEPPER, member.passwordHash);
                 }
 
@@ -43,7 +55,14 @@ const memberController = {
             .then(isOk => {
                 // Le login est valide
                 if (isOk) {
-                    // TODO Gestion de la session :o
+                    // Créer la session
+                    req.session.connected = true;
+                    req.session.member = {
+                        memberId: memberDB.memberId,
+                        pseudo: memberDB.pseudo
+                    };
+
+                    // Redirection
                     res.redirect('/');
                 }
                 // Le login est invalide
@@ -55,8 +74,10 @@ const memberController = {
     },
 
     logout: (req, res) => {
-        // TODO Gesion de la session :x
+        // Destruction de la session :x
+        req.session.destroy();
 
+        // Redirection
         res.redirect('/');
     }
 };
