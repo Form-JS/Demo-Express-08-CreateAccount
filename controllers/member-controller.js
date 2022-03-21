@@ -1,5 +1,4 @@
 const bcryt = require('bcrypt');
-const { log } = require('console');
 const memberModel = require('../models/member-model');
 
 const memberController = {

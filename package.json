@@ -18,7 +18,7 @@
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
-    "dev": "cross-env NODE_ENV=development nodemon app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app.js --ignore sessions/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aurélien",

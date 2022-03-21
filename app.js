@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const customRenderMiddleware = require('./middlewares/custom-render-middleware');
 const homeRouter = require('./routes/home-router');
 const memberRouter = require('./routes/member-route');
 
@@ -29,6 +30,7 @@ app.set('views', process.cwd() + '/views');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(customRenderMiddleware('Guillaume'));
 
 // Routing
 app.use(homeRouter);
