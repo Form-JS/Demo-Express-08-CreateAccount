@@ -1,4 +1,4 @@
-const customRenderMiddleware = (title) => {
+const customRenderMiddleware = ({ title }) => {
 
     return (req, res, next) => {
         /**

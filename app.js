@@ -34,7 +34,7 @@ app.set('views', process.cwd() + '/views');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(customRenderMiddleware('Guillaume'));
+app.use(customRenderMiddleware({ title: 'Title page ♥' }));
 
 // Routing
 app.use(homeRouter);
